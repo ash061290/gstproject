@@ -80,132 +80,126 @@ body {
 		</div>
 <!---------------------------------------------End Registration form--------------------------------------------------------->
 		  <!-- /.box-body -->
+      <?php
+      if(isset($_POST['login'])){
+
+      //  include("../gst_software/attachemnt/classes/firm_detail.php");
+        include("../gst_software/attachment/classes/firm_detail.php");
+        $user_name=$_POST['admin_name'];
+      	$user_pass=$_POST['password'];
+      	$encrypt=md5($user_pass);
+        $admin_table = "admin_firm_detail";
+        $employee_table="user_detail";
+        $data = array("admin_name"=>"'$user_name'"," and firm_pass"=>"'$encrypt'"," and firm_status"=>"'Active'");
+        $result = $login->admin_login($admin_table,$data);
+         print_r($result);
+         if($result['admin_id']){
+            	echo "<script>window.open('main.php','_self')</script>";
+         }
+        /*
+       $result = $login->employee_login();
+          $query="select * from admin_firm_detail where admin_name='$user_name' and firm_pass='$encrypt' and firm_status='Active'";
+          $run=mysql_query($query) or die(mysql_error());
+           $numrow1 = mysql_num_rows($run);
+      	 $fetchrow = mysql_fetch_array($run);
+          if($numrow1>0){
+      		 $select = "select admin_name from admin_firm_detail where firm_session='1'";
+      		 $run = mysql_query($select);
+      		 while($fetchrow2 = mysql_fetch_array($run))
+      		 {
+      		  $update3 = "update admin_firm_detail set firm_session='0' where admin_name='".$fetchrow2['admin_name']."'";
+      		  mysql_query($update3);
+      		 }
+      		 $update = "update admin_firm_detail set firm_session='1' where admin_name='$user_name'";
+      		 mysql_query($update);
+      	$_SESSION['firm_name'] = $fetchrow['firm_name'];
+      	$_SESSION['firm_id'] = $fetchrow['id'];
+          $_SESSION['emp_id']=$user_name;
+      	$_SESSION['user_role'] = "Main_Admin";
+      	$_SESSION['admin'] = "dashboard";
+      	$_SESSION['sales'] = "Sales";
+      	$_SESSION['purchase'] = "Purchase";
+      	$_SESSION['expense'] = "Expense";
+      	$_SESSION['inventory'] = "Inventory";
+      	$_SESSION['banking'] = "Banking";
+      	$_SESSION['items_tracking'] = "Items_Tracking";
+      	$_SESSION['recycle'] = "Recycle";
+      	$_SESSION['contact'] = "Contact";
+      	$_SESSION['report'] = "Report";
+      	//$_SESSION['outstanding'] = "Outstanding";
+      	$_SESSION['change_password'] = "Change_Password";
+      	$_SESSION['profile'] = "profile";
+      	echo "<script>window.open('main.php','_self')</script>";
+          }
+           else{
+      	      $qry2 = "select company_code,user_role,user_permission from user_detail where user_mobile='$user_name' and user_password='$encrypt' and status='Active'";
+      		   $run2 = mysql_query($qry2) or die(mysql_error());
+      		   $numrow2 = mysql_num_rows($run2);
+      		   $fetchrow2 = mysql_fetch_array($run2);
+      		   if($numrow2>0)
+      		   {
+      			   $_SESSION['emp_id'] = $user_name;
+      			   $_SESSION['firm_id'] = $fetchrow2['company_code'];
+      			   $_SESSION['user_role'] = $fetchrow2['user_role'];
+      			   $_SESSION['admin'] = "dashboard";
+      			   $permission = $fetchrow2['user_permission'];
+      			   if($fetchrow2['user_role'] == 'Admin'){
+      			      $_SESSION['permission'] = "All";
+      				  $select_company = "select * from admin_firm_detail where id='".$fetchrow2['company_code']."'";
+      			   $run3 = mysql_query($select_company) or die(mysql_error());
+      			   $fetchrow3 = mysql_fetch_array($run3);
+      			   $_SESSION['firm_name']  = $fetchrow3['firm_name'];
+      			   $_SESSION['profile'] = "profile";
+      			    echo "<script>window.open('main.php','_self')</script>";
+      			   }else{
+      			   if($fetchrow2['user_role'] == 'Employee'){
+      				   $permission = json_decode($permission);
+      				   if(in_array("Sales",$permission)){
+      				     $_SESSION['sales'] = "Sales";
+      				   }
+      				    if(in_array("Purchase",$permission)){
+      				     $_SESSION['purchase'] = "Purchase";
+      				   }
+      				    if(in_array("Inventory",$permission)){
+      				     $_SESSION['inventory'] = "Inventory";
+      				   }
+      				    if(in_array("Items_Tracking",$permission)){
+      				     $_SESSION['items_tracking'] = "Items_Tracking";
+      				   }
+      				   if(in_array("Banking",$permission)){
+      				     $_SESSION['banking'] = "Banking";
+      				   }
+      				   if(in_array("Contact",$permission)){
+      				     $_SESSION['contact'] = "Contact";
+      				   }
+      				    if(in_array("Expenses",$permission)){
+      				     $_SESSION['expense'] = "Expenses";
+      				   }
+      				   if(in_array("Change_Password",$permission)){
+      				     $_SESSION['change_password'] = "Change_Password";
+      				   }
+      				    if(in_array("Recycle",$permission)){
+      				     $_SESSION['recycle'] = "Recycle";
+      				   }
+      				    if(in_array("Report",$permission)){
+      				     $_SESSION['report'] = "Report";
+      				   }
+
+      				    $select_company = "select * from admin_firm_detail where id='".$fetchrow2['company_code']."'";
+      			   $run3 = mysql_query($select_company) or die(mysql_error());
+      			   $fetchrow3 = mysql_fetch_array($run3);
+      			   $_SESSION['firm_name']  = $fetchrow3['firm_name'];
+      			    echo "<script>window.open('main.php','_self')</script>";
+      			   }
+      		   }
+      		   }
+
+      	 }
+         */
+      	}
+      ?>
+
           </div>
 </section>
-
-
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
 </body>
 </html>
-<?php
-if(isset($_POST['login'])){
-//  include("../gst_software/attachemnt/classes/firm_detail.php");
-  include("../gst_software/attachment/classes/firm_detail.php");
-  $user_name=$_POST['admin_name'];
-	$user_pass=$_POST['password'];
-	$encrypt=md5($user_pass);
-  $admin_table = "admin_firm_detail";
-  $employee_table="user_detail";
-  $data = array("admin_name"=>"'$user_name'"," and firm_pass"=>"'$encrypt'"," and firm_status"=>"'Active'");
-  $result = $login->admin_login($admin_table,$data);
-  print_r($result);
-  /*
- $result = $login->employee_login();
-    $query="select * from admin_firm_detail where admin_name='$user_name' and firm_pass='$encrypt' and firm_status='Active'";
-    $run=mysql_query($query) or die(mysql_error());
-     $numrow1 = mysql_num_rows($run);
-	 $fetchrow = mysql_fetch_array($run);
-    if($numrow1>0){
-		 $select = "select admin_name from admin_firm_detail where firm_session='1'";
-		 $run = mysql_query($select);
-		 while($fetchrow2 = mysql_fetch_array($run))
-		 {
-		  $update3 = "update admin_firm_detail set firm_session='0' where admin_name='".$fetchrow2['admin_name']."'";
-		  mysql_query($update3);
-		 }
-		 $update = "update admin_firm_detail set firm_session='1' where admin_name='$user_name'";
-		 mysql_query($update);
-	$_SESSION['firm_name'] = $fetchrow['firm_name'];
-	$_SESSION['firm_id'] = $fetchrow['id'];
-    $_SESSION['emp_id']=$user_name;
-	$_SESSION['user_role'] = "Main_Admin";
-	$_SESSION['admin'] = "dashboard";
-	$_SESSION['sales'] = "Sales";
-	$_SESSION['purchase'] = "Purchase";
-	$_SESSION['expense'] = "Expense";
-	$_SESSION['inventory'] = "Inventory";
-	$_SESSION['banking'] = "Banking";
-	$_SESSION['items_tracking'] = "Items_Tracking";
-	$_SESSION['recycle'] = "Recycle";
-	$_SESSION['contact'] = "Contact";
-	$_SESSION['report'] = "Report";
-	//$_SESSION['outstanding'] = "Outstanding";
-	$_SESSION['change_password'] = "Change_Password";
-	$_SESSION['profile'] = "profile";
-	echo "<script>window.open('main.php','_self')</script>";
-    }
-     else{
-	      $qry2 = "select company_code,user_role,user_permission from user_detail where user_mobile='$user_name' and user_password='$encrypt' and status='Active'";
-		   $run2 = mysql_query($qry2) or die(mysql_error());
-		   $numrow2 = mysql_num_rows($run2);
-		   $fetchrow2 = mysql_fetch_array($run2);
-		   if($numrow2>0)
-		   {
-			   $_SESSION['emp_id'] = $user_name;
-			   $_SESSION['firm_id'] = $fetchrow2['company_code'];
-			   $_SESSION['user_role'] = $fetchrow2['user_role'];
-			   $_SESSION['admin'] = "dashboard";
-			   $permission = $fetchrow2['user_permission'];
-			   if($fetchrow2['user_role'] == 'Admin'){
-			      $_SESSION['permission'] = "All";
-				  $select_company = "select * from admin_firm_detail where id='".$fetchrow2['company_code']."'";
-			   $run3 = mysql_query($select_company) or die(mysql_error());
-			   $fetchrow3 = mysql_fetch_array($run3);
-			   $_SESSION['firm_name']  = $fetchrow3['firm_name'];
-			   $_SESSION['profile'] = "profile";
-			    echo "<script>window.open('main.php','_self')</script>";
-			   }else{
-			   if($fetchrow2['user_role'] == 'Employee'){
-				   $permission = json_decode($permission);
-				   if(in_array("Sales",$permission)){
-				     $_SESSION['sales'] = "Sales";
-				   }
-				    if(in_array("Purchase",$permission)){
-				     $_SESSION['purchase'] = "Purchase";
-				   }
-				    if(in_array("Inventory",$permission)){
-				     $_SESSION['inventory'] = "Inventory";
-				   }
-				    if(in_array("Items_Tracking",$permission)){
-				     $_SESSION['items_tracking'] = "Items_Tracking";
-				   }
-				   if(in_array("Banking",$permission)){
-				     $_SESSION['banking'] = "Banking";
-				   }
-				   if(in_array("Contact",$permission)){
-				     $_SESSION['contact'] = "Contact";
-				   }
-				    if(in_array("Expenses",$permission)){
-				     $_SESSION['expense'] = "Expenses";
-				   }
-				   if(in_array("Change_Password",$permission)){
-				     $_SESSION['change_password'] = "Change_Password";
-				   }
-				    if(in_array("Recycle",$permission)){
-				     $_SESSION['recycle'] = "Recycle";
-				   }
-				    if(in_array("Report",$permission)){
-				     $_SESSION['report'] = "Report";
-				   }
-
-				    $select_company = "select * from admin_firm_detail where id='".$fetchrow2['company_code']."'";
-			   $run3 = mysql_query($select_company) or die(mysql_error());
-			   $fetchrow3 = mysql_fetch_array($run3);
-			   $_SESSION['firm_name']  = $fetchrow3['firm_name'];
-			    echo "<script>window.open('main.php','_self')</script>";
-			   }
-		   }
-		   }
-
-	 }
-   */
-	}
-?>

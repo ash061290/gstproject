@@ -1,4 +1,4 @@
-<?php include('../attachment/session.php'); ?>
+<?php //include('../attachment/session.php'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -64,7 +64,7 @@
                 <p>Total Stores</p>
               </div>
               <div class="icon" id="dash_icon3">
-                
+
 				<i class="fa fa-archive f-s-40 color-warning"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
@@ -139,7 +139,7 @@
 		   </section>
 		   </div>
         <!-- right col -->
-		</section> 
+		</section>
       </div>
         <!-- /.row -->
     <!-- /.content -->
@@ -149,7 +149,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $("#dashboardMainMenu").addClass('active');
-    }); 
+    });
   </script>
   <script>
      $(document).ready(function() {
@@ -193,7 +193,7 @@
 	 }
 	 ];
 	 var piechart = new Chart(ctx).Doughnut(data);
-    }); 
+    });
   var area = new Morris.Area({
     element   : 'revenue-chart',
     resize    : true,

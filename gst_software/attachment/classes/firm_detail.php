@@ -4,11 +4,11 @@ class dbh{
                  private $username;
                  private $password;
                  private $dbname;
-            protected function connect(){
+     protected function connect(){
                  $this->servername = "localhost";
                  $this->username = "root";
                  $this->password = "";
-                 $this->dbname = "ashish_gst";
+                 $this->dbname = "gst_new";
                  $conn = new mysqli($this->servername,$this->username,$this->password,$this->dbname);
                  return $conn;
             }
@@ -24,14 +24,14 @@ class dbh{
                  }
                $new2 = implode(" ",$new2);
                 $qry = "select * from $table where $new2";
-                   $result=$this->connect()->query($qry);
-                   $numrows = $result->num_rows;
+                  $result=$this->connect()->query($qry);
+                  $numrows = $result->num_rows;
                    if($numrows>0){
                       $update_row =  $this->update_admin_row("admin_name",$table);
                       $update_main_row = $this->update_main_row("admin_name",$table,$data['admin_name']);
                       $data[]="";
                       if($row = $result->fetch_assoc()){
-                        $result = $this->session_admin($row);
+                      return  $result = $this->session_admin($row);
                    }
                   }
                 }
@@ -56,11 +56,10 @@ class dbh{
                 //session function
                   public function session_admin($data)
                 {
-                        session_start();
-                        $_SESSION['emp_id'] = $data['id'];
-                        $_SESSION['firm_name'] = $data['firm_name'];
-                        $_SESSION['emp_id']=$data['admin_name'];
-                        $_SESSION['user_role'] = "Main_Admin";
+                      return  $array = array("admin_id"=>$_SESSION['admin_id'] = $data['id'],
+                        "firm_name"=>$_SESSION['firm_name'] = $data['firm_name'],
+                        "admin_name"=>$_SESSION['admin_name']=$data['admin_name']);
+                      /*  $_SESSION['user_role'] = "Main_Admin";
                         $_SESSION['admin'] = "dashboard";
                         $_SESSION['sales'] = "Sales";
                         $_SESSION['purchase'] = "Purchase";
@@ -72,7 +71,7 @@ class dbh{
                         $_SESSION['contact'] = "Contact";
                         $_SESSION['report'] = "Report";
                         $_SESSION['change_password'] = "Change_Password";
-                        $_SESSION['profile'] = "profile";
+                        $_SESSION['profile'] = "profile";*/
                 }  //session function end
 
                public function employee_login($table,$data){
@@ -470,5 +469,6 @@ $query="select * from $table where admin_name='".$data['id']."' and firm_pass='"
 				}
 				}
 		}
+
 		$new = new firm_detail();
 ?>
