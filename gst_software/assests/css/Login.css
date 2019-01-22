@@ -1,0 +1,41 @@
+body {
+   background-color: #B3B9BB;
+}
+#dash_icon{
+ padding-top: 15px;
+  padding-right: 15px;
+     text-align: center;
+   font-size:60px;
+   color:#007bff;
+}
+#dash_icon1{
+ padding-top: 15px;
+  padding-right: 15px;
+     text-align: center;
+   font-size:60px;
+   color:#26dad2;
+}
+#dash_icon2{
+ padding-top: 15px;
+  padding-right: 15px;
+     text-align: center;
+   font-size:60px;
+   color:#fc6180;
+}
+#dash_icon3{
+ padding-top: 15px;
+  padding-right: 15px;
+     text-align: center;
+   font-size:60px;
+   color:#ffb64d;
+}
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block; // 1
+  vertical-align: baseline; // 2
+}
+
+
