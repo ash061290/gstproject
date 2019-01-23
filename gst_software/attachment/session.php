@@ -1,12 +1,20 @@
-<?php  session_start();
-if(!isset($_SESSION['emp_id'])){
- echo "<script>window.open('index.php','_self')</script>";	
+<?php
+ class session{
+          public $session_data;
+          protected function session_data(){
+            return $this->session_data = $_SESSION[];
+          }
+ }
+echo $session = new session($_SESSION[]);
+/*
+if(!isset($_SESSION['admin_id'])){
+ echo "<script>window.open('index.php','_self')</script>";
 }
-if(isset($_SESSION['emp_id']))
+if(isset($_SESSION['admin_id']))
 {
-	if(isset($_SESSION['user_role']))
+	if(isset($_SESSION['user_id']))
 	{
- $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; 
+ $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
  $array = explode("/",$actual_link);
  end($array);
  $folder = prev($array);
@@ -19,17 +27,5 @@ if(isset($_SESSION['emp_id']))
  $company_code = $_SESSION['firm_id'];
  $image_path = "../gst_software/images/";
 }
-$con371="../../../con73/con37.php";
-$con372="../../con73/con37.php";
-$con373="../con73/con37.php";
-if(file_exists($con371)){
-	include($con371);
-}else if(file_exists($con372)){
-	include($con372);
-}else if(file_exists($con373)){
-	include($con373);
-}else{
-	echo "no database";
-}
-
+*/
 ?>
