@@ -56,22 +56,17 @@ class dbh{
                 //session function
                   public function session_admin($data)
                 {
-                      return  $array = array("admin_id"=>$_SESSION['admin_id'] = $data['id'],
+                      return  $array = array("firm_id"=>$_SESSION['firm_id'] = $data['id'],
                         "firm_name"=>$_SESSION['firm_name'] = $data['firm_name'],
-                        "admin_name"=>$_SESSION['admin_name']=$data['admin_name']);
-                      /*  $_SESSION['user_role'] = "Main_Admin";
-                        $_SESSION['admin'] = "dashboard";
-                        $_SESSION['sales'] = "Sales";
-                        $_SESSION['purchase'] = "Purchase";
-                        $_SESSION['expense'] = "Expense";
-                        $_SESSION['inventory'] = "Inventory";
-                        $_SESSION['banking'] = "Banking";
-                        $_SESSION['items_tracking'] = "Items_Tracking";
-                        $_SESSION['recycle'] = "Recycle";
-                        $_SESSION['contact'] = "Contact";
-                        $_SESSION['report'] = "Report";
-                        $_SESSION['change_password'] = "Change_Password";
-                        $_SESSION['profile'] = "profile";*/
+                        "admin_name"=>$_SESSION['admin_name']=$data['admin_name'],
+                        "user_role"=>$_SESSION["user_role"]="Main_Admin","dashboard"=>$_SESSION['admin']="Dashboard",
+                         "sales"=>$_SESSION['sales']="Sales","purchase"=>$_SESSION['purchase']="Purchase","expense"=>$_SESSION['expense']="Expense",
+                         "inventory"=>$_SESSION['inventory']="Inventory","banking"=>$_SESSION['banking']="Banking","items_tracking"=>$_SESSION['items_tracking']="Items_Tracking",
+                         "recycle"=>$_SESSION['recycle']="Recycle","contact"=>$_SESSION['Contact']="Contact","report"=>$_SESSION['Report']="Report",
+                         "change_password"=>$_SESSION['change_password']="Change_Password","profile"=>$_SESSION['profile']="Profile");
+
+
+                        
                 }  //session function end
 
                public function employee_login($table,$data){

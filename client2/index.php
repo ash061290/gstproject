@@ -92,8 +92,10 @@ body {
         $employee_table="user_detail";
         $data = array("admin_name"=>"'$user_name'"," and firm_pass"=>"'$encrypt'"," and firm_status"=>"'Active'");
         $result = $login->admin_login($admin_table,$data);
-         print_r($result);
-         if($result['admin_id']){
+      //  print_r($result);
+
+      //  include("../gst_software/attachment/classes/session.php");
+         if(isset($_SESSION['firm_id'])){
             	echo "<script>window.open('main.php','_self')</script>";
          }
         /*
