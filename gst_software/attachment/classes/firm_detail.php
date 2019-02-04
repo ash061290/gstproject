@@ -65,8 +65,6 @@ class dbh{
                          "recycle"=>$_SESSION['recycle']="Recycle","contact"=>$_SESSION['Contact']="Contact","report"=>$_SESSION['Report']="Report",
                          "change_password"=>$_SESSION['change_password']="Change_Password","profile"=>$_SESSION['profile']="Profile");
 
-
-                        
                 }  //session function end
 
                public function employee_login($table,$data){
@@ -100,9 +98,9 @@ class firm_detail extends dbh{
        public function fetch_company($id)
 	   {
 		    $sql = "select * from admin_firm_detail where id='$id'";
-			$run = mysql_query($sql);
-			 $row = "";
-			while($row = mysql_fetch_array($run))
+			  $run = $this->connect()->query($sql);
+			  $row = "";
+			while($row = mysqli_fetch_array($run))
 			{
 				return $row;
 			}
@@ -167,49 +165,49 @@ class firm_detail extends dbh{
 	  public function deactive_company_detail()
 	 {
 		 $sql = "select * from admin_firm_detail where firm_status='Active' and firm_session='0'";
-		 $run = mysql_query($sql);
-		 $numrow = mysql_num_rows($run);
-		  $row = "";
-		 for($i=0;$i<$numrow;$i++)
-		 {
-			 $row[$i] = mysql_fetch_array($run);
-		 }
-		 return $row;
+		 $run = $this->connect()->query($sql);
+		  if($run->num_rows>0){
+        $i=0;
+        while($row = $run->fetch_assoc()){
+          echo $row;
+        }
+      }
+
 
 	 }
 	  public function company_user($company_id)
        {
 		   $sql = "select * from user_detail where company_code='$company_id'";
-		   $run = mysql_query($sql);
-		   $numrow = mysql_num_rows($run);
+		   $run = $this->connect()->query($sql);
+		   $numrow = mysqli_num_rows($run);
 		   $row = "";
 		 for($i=0;$i<$numrow;$i++)
 		 {
-			 $row[$i] = mysql_fetch_array($run);
+			 $row[$i] = mysqli_fetch_array($run);
 		 }
 		 return $row;
          }
   public function company_name($company_id)
        {
 		   $sql = "select * from admin_firm_detail where id='$company_id'";
-		   $run = mysql_query($sql);
-		   $row = mysql_fetch_array($run);
+		   $run = $this->connect()->query($sql);
+		   $row = mysqli_fetch_array($run);
 		  return $company_name = $row['firm_name'];
          }
   public function company_satatus_update($company_id)
       {
 		$select = "select * from admin_firm_detail where id='".$company_id."' and firm_session='0'";
-         $run = mysql_query($select);
-         $row = mysql_fetch_array($run);
+         $run = $this->connect()->query($select);
+         $row = mysqli_fetch_array($run);
          if($row['firm_status'] == 'Deactive')
 		 {
 			 $update = "update admin_firm_detail set firm_status='Active' where id='".$company_id."'";
-		     return $run = mysql_query($update);
+		     return $run = $this->connect()->query($update);
 		 }
         if($row['firm_status'] == 'Active')
 		 {
 			 $update = "update admin_firm_detail set firm_status='Deactive' where id='".$company_id."'";
-			 return $run = mysql_query($update);
+			 return $run = $this->connect()->query($update);
 		 }
 
         }
@@ -217,12 +215,12 @@ class firm_detail extends dbh{
      public function insert_invoice_no($data)
 	 {
 		  $sql = "INSERT INTO `invoice_no`(`admin_name`, `admin_contact`, `admin_id`, `admin_password`, `admin_place_of_supply`, `folder_id`, `recuring_no`, `sales_invoice_no`, `sales_invoice_draft_no`, `purchase_estimate_no`, `purchase_estimate_draft_no`, `sales_estimate_no`, `sales_estimate_draft_no`, `sales_order_no`, `sales_order_draft_no`, `delivery_challan_no`, `delivery_challan_draft_no`, `image`, `advance_invoice_no`, `purchase_invoice_no`, `purchase_invoice_draft_no`, `purchase_order_no`, `purchase_order_draft_no`, `purchase_delivery_challan_no`, `purchase_delivery_challan_draft_no`, `retainer_invoice_no`, `retainer_purchase_invoice_no`, `credit_no`, `package_invoice_no`, `shipping_invoice_no`, `expense_no`, `company_name`, `company_code`) VALUES ('".$data['firm_name']."','".$data['firm_contact']."','".$data['firm_email']."','".$data['firm_pass']."','".$data['firm_address']."','','".$data['recuring_no']."','".$data['sales_invoice_no']."','','".$data['purchase_estimate_no']."','','".$data['sales_estimate_no']."','','".$data['sales_order_no']."','','".$data['delivery_challan_no']."','','".$data['firm_logo']."','".$data['advance_invoice_no']."','".$data['purchase_invoice_no']."','','".$data['purchase_order_no']."','','".$data['purchase_delivery_challan_no']."','','".$data['retainer_invoice_no']."','".$data['retainer_purchase_invoice_no']."','".$data['credit_no']."','".$data['package_invoice_no']."','".$data['shipping_invoice_no']."','".$data['expense_no']."','".$data['firm_name']."','".$data['company_code']."')";
-		  return $run = mysql_query($sql);
+		  return $run = $this->connect()->query($sql);
 	  }
 public function check_user_mobile($data){
     $select  = "select user_mobile,user_mobile2 from user_detail where user_mobile='".$data['mobile1']."'";
-	 $run = mysql_query($select);
-	 $numrow = mysql_num_rows($run);
+	 $run = $this->connect()->query($select);
+	 $numrow = mysqli_num_rows($run);
 	 if($numrow>0){
 	     return true;
 	  }
@@ -230,8 +228,8 @@ public function check_user_mobile($data){
 }
 public function check_user_email($data){
     $select  = "select user_email from user_detail where user_email='".$data['email']."'";
-	 $run = mysql_query($select);
-	 $numrow = mysql_num_rows($run);
+	 $run = $this->connect->query($select);
+	 $numrow = mysqli_num_rows($run);
 	 if($numrow>0){
 	     return true;
 	  }

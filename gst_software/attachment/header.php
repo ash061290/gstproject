@@ -1,5 +1,5 @@
-<?php 
-if(!$_SESSION['emp_id']){
+<?php
+if(!$_SESSION['user_role']){
 echo "<script>window.location('main.php')</script>";
 }
 ?>
@@ -49,10 +49,10 @@ function status_change(value){
       <div class="navbar-custom-menu">
          <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
-            <?php 
-			 $firm_id = $_SESSION['firm_id']; 
+            <?php
+			 $firm_id = $_SESSION['firm_id'];
 			/*if(isset($_SESSION['user_role'])) {
-                   $row1 = $new->fetch_company($firm_id);  } */ 
+                   $row1 = $new->fetch_company($firm_id);  } */
 				    if($_SESSION['user_role'] =='Admin' || $_SESSION['user_role']=='Employee'){
 					      ?>
 	 <li class="dropdown user user-menu">
@@ -81,8 +81,8 @@ function status_change(value){
                   <a href="javascript:get_content('contact/logout')" class="btn btn-default btn-flat" onclick="return myFunction()" style="border:none; border-radius:10px;">Sign out</a>
                 </div>
               </li>
-			  </ul> </li>  
-						  
+			  </ul> </li>
+
 						  <?php }else{ ?>
 					  <?php
 				 if($_SESSION['user_role']=='Main_Admin'){ ?>
@@ -115,6 +115,7 @@ function status_change(value){
 					 <?php  ?>
 			   <li style="padding:10px; font-size:16px;"><strong><span>My Organization</span><span style="float:right; font-size:18px; padding-right:10px; color:red"><a href="javascript:get_content('profile/setting')" ><i class="fa fa-gear" ></i></a></span></strong></li>
 			    <?php $result = $new->deactive_company_detail();
+					          print_r($result); 
                      foreach($result as $row){	?>
 			  <li class="user-header" style="border-bottom:1px solid #f9f9f9;">
                <img id="show_company_logo" src='<?php if($row['firm_logo']!=''){ echo 'data:image;base64,'.$row['firm_logo']; }else{ echo $image_path."Profile.png"; }  ?>' width='15px' height='15px'>
@@ -138,16 +139,15 @@ function status_change(value){
           </li>
 						  <?php  } }  ?>
 		  <!-- User Detail -->
-		 	
+
 		  <!-- end -->
           <!-- Control Sidebar Toggle Button -->
 		  <?php if($_SESSION['user_role']=='Main_Admin'){ ?>
           <li>
             <a href="javascript:get_content('profile/warehouse_setting')"><i class="fa fa-gear" style="font-size:18px;" ></i></a>
           </li>
-		  <?php } ?>	
+		  <?php } ?>
         </ul>
       </div>
     </nav>
   </header>
-  

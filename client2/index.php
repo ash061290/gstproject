@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <html>
 <head>
  <meta charset="utf-8">
@@ -82,7 +83,7 @@ body {
 		  <!-- /.box-body -->
       <?php
       if(isset($_POST['login'])){
-
+       session_start();
       //  include("../gst_software/attachemnt/classes/firm_detail.php");
         include("../gst_software/attachment/classes/firm_detail.php");
         $user_name=$_POST['admin_name'];
