@@ -114,8 +114,8 @@ function status_change(value){
               </li>
 					 <?php  ?>
 			   <li style="padding:10px; font-size:16px;"><strong><span>My Organization</span><span style="float:right; font-size:18px; padding-right:10px; color:red"><a href="javascript:get_content('profile/setting')" ><i class="fa fa-gear" ></i></a></span></strong></li>
-			    <?php $result = $new->deactive_company_detail();
-					          print_r($result); 
+			    <?php echo $result = $new->deactive_company_detail();
+					          print_r($result); exit;
                      foreach($result as $row){	?>
 			  <li class="user-header" style="border-bottom:1px solid #f9f9f9;">
                <img id="show_company_logo" src='<?php if($row['firm_logo']!=''){ echo 'data:image;base64,'.$row['firm_logo']; }else{ echo $image_path."Profile.png"; }  ?>' width='15px' height='15px'>

@@ -1,4 +1,6 @@
-<?php ob_start(); ?>
+<?php
+ob_start();
+ ?>
 <html>
 <head>
  <meta charset="utf-8">

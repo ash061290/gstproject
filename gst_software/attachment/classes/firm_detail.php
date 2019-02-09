@@ -164,14 +164,13 @@ class firm_detail extends dbh{
 	 }
 	  public function deactive_company_detail()
 	 {
-		 $sql = "select * from admin_firm_detail where firm_status='Active' and firm_session='0'";
+	echo	 $sql = "select * from admin_firm_detail where firm_status='Active' and firm_session='0'";
 		 $run = $this->connect()->query($sql);
-		  if($run->num_rows>0){
-        $i=0;
-        while($row = $run->fetch_assoc()){
-          echo $row;
-        }
-      }
+    echo $row = $run->fetch_array();
+    // $numrow = $run->num_rows;
+		 // if($numrow>0){
+      //echo  $row = $run->fetch_array();
+    //  }
 
 
 	 }
